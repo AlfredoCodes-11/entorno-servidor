@@ -15,7 +15,10 @@
 </head>
 <body>
     💎
-    
+    💥 trampa
+📦 cofre
+🔑 llave
+🔒 cofre cerrado
     <table>
         <tbody>
             <tr>
