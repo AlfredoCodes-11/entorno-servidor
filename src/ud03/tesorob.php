@@ -14,6 +14,16 @@
     </style>
 </head>
 <body>
+    <?php
+        $ganado = false;
+
+        if (isset($_POST["posicion"])) {
+            if ($_POST["posicion"] == $_POST["diamante"]) {
+                $ganado = true;
+            }
+        }
+    ?>
+
     <h2>Tablero</h2>
     <table>
         <tbody>
@@ -74,12 +84,39 @@
     </table>
 
     <!-- Formulario de juego -->
-     <form action="procesarPost.php" method="post">
-        <input type="hidden" name="diamante" value="<?php $posiciones[0] ?>">
-        <label for="numero">Posición</label>
-        <input id="numero" type="number" name="posicion" min="1" max="100" autofocus required>
-        <button>Enviar</button>
-     </form>
+     <!-- <form action="tesorob.php" method="post"> -->
+        <!-- <input type="hidden" name="diamante" value=">"> -->
+        <!-- <label for="numero">Posición</label> -->
+        <!-- <input id="numero" type="number" name="posicion" min="1" max="100" autofocus required> -->
+        <!-- <button>Enviar</button> -->
+     <!-- </form> -->
+
+        <?php
+            if ($ganado) {
+                echo "<h2>¡Has encontrado el tesoro!</h2>";
+            } else {
+                echo "<form action=\"tesorob.php\" method=\"post\">";
+                echo "<input type=\"hidden\" name=\"diamante\" value=\"$posiciones[0]\">";
+                echo "<label for=\"numero\">Posición</label>";
+                echo "<input id=\"numero\" type=\"number\" name=\"posicion\" min=\"1\" max=\"100\" autofocus required>";
+                echo "<button>Enviar</button>";
+                echo "</form>";
+            }
+        ?>
+
+
+        <?php
+
+            if (isset($_POST["posicion"])) {
+                $posicion_player = $_POST["posicion"];
+                $tesoro = $posiciones[0];
+
+                if ($posicion_player == $tesoro) {
+                    echo "<h2>¡Encontraste el tesoro!</h2>";
+                }
+            }
+
+        ?>
 
      
 

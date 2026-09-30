@@ -13,7 +13,7 @@
 
         <br/>
 
-        <label for="nombre">Introduce tu edad: </label>
+        <label for="edad">Introduce tu edad: </label>
         <input id="edad" type="text" name="edad">
 
         <button>Enviar</button>
