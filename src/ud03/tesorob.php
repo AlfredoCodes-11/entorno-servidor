@@ -29,19 +29,27 @@
         <tbody>
             <tr>
         <?php
-
+            $simbolos = false;
             # posiciones de los elementos
             $posiciones = [];
 
             # colocamos los elementos
-            for ($i=1; $i<=4; $i++):
-                do {
-                    $valor = rand(1,100);
-                } while (in_array($valor,$posiciones));
+            if (!$simbolos){
+                for ($i=1; $i<=4; $i++):
+                    do {
+                        $valor = rand(1,100);
+                    } while (in_array($valor,$posiciones));
 
-                # guardamos el valor en el array
-                $posiciones[] = $valor;
-            endfor;
+                    # guardamos el valor en el array
+                    $posiciones[] = $valor;
+                    $simbolos = true;
+                endfor;
+            } else {
+                for ($l=0; $l<3; $i++):
+                    $posiciones[$l]=$_POST[$l];
+                    $simbolos = true;
+                endfor;
+            }
 
             $filas=1;
             for($i = 1; $i <= 100; $i++):
@@ -97,10 +105,14 @@
             } else {
                 echo "<form action=\"tesorob.php\" method=\"post\">";
                 echo "<input type=\"hidden\" name=\"diamante\" value=\"$posiciones[0]\">";
+                echo "<input type=\"hidden\" name=\"trampa\" value=\"$posiciones[1]\">";
+                echo "<input type=\"hidden\" name=\"cofre\" value=\"$posiciones[2]\">";
+                echo "<input type=\"hidden\" name=\"llave\" value=\"$posiciones[3]\">";
                 echo "<label for=\"numero\">Posición</label>";
                 echo "<input id=\"numero\" type=\"number\" name=\"posicion\" min=\"1\" max=\"100\" autofocus required>";
                 echo "<button>Enviar</button>";
                 echo "</form>";
+
             }
         ?>
 

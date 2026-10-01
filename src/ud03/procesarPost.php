@@ -11,7 +11,10 @@
     $posicion = $_POST['posicion'];
 
     if ($posicion == $diamante) {
-        echo "<h2>🎉 ¡Has encontrado el tesoro!</h2>";
+        echo "<h2>¡Has encontrado el tesoro!</h2>";
+        echo "<a href=\"tesoro.php\">Jugar de nuevo</a>";
+    } else {
+         echo "<h2>¡Has fallado!</h2>";
         echo "<a href=\"tesoro.php\">Jugar de nuevo</a>";
     }
 ?>
