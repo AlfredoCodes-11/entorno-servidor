@@ -29,12 +29,11 @@
         <tbody>
             <tr>
         <?php
-            $simbolos = false;
             # posiciones de los elementos
             $posiciones = [];
 
             # colocamos los elementos
-            if (!$simbolos){
+            if (!isset($_POST["posicion"])){
                 for ($i=1; $i<=4; $i++):
                     do {
                         $valor = rand(1,100);
@@ -42,13 +41,12 @@
 
                     # guardamos el valor en el array
                     $posiciones[] = $valor;
-                    $simbolos = true;
                 endfor;
             } else {
-                for ($l=0; $l<3; $i++):
-                    $posiciones[$l]=$_POST[$l];
-                    $simbolos = true;
-                endfor;
+                    $posiciones[0] = $_POST["diamante"];
+                    $posiciones[1] = $_POST["trampa"];
+                    $posiciones[2] = $_POST["cofre"];
+                    $posiciones[3] = $_POST["llave"];
             }
 
             $filas=1;
@@ -130,7 +128,7 @@
 
         ?>
 
-     
+     <!-- Ver si se puede mandar el array -->
 
 </body>
 </html>
