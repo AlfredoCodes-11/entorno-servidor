@@ -43,10 +43,7 @@
                     $posiciones[] = $valor;
                 endfor;
             } else {
-                    $posiciones[0] = $_POST["diamante"];
-                    $posiciones[1] = $_POST["trampa"];
-                    $posiciones[2] = $_POST["cofre"];
-                    $posiciones[3] = $_POST["llave"];
+                   $posiciones = $_POST["posiciones"];
             }
 
             $filas=1;
@@ -102,7 +99,10 @@
                 echo "<h2>¡Has encontrado el tesoro!</h2>";
             } else {
                 echo "<form action=\"tesorob.php\" method=\"post\">";
-                echo "<input type=\"hidden\" name=\"diamante\" value=\"$posiciones[0]\">";
+
+                foreach ($posiciones as $valor){
+                    echo "<input type=\"hidden\" name=\"posiciones[]\" value=\"$valor\">";
+                }
                 echo "<input type=\"hidden\" name=\"trampa\" value=\"$posiciones[1]\">";
                 echo "<input type=\"hidden\" name=\"cofre\" value=\"$posiciones[2]\">";
                 echo "<input type=\"hidden\" name=\"llave\" value=\"$posiciones[3]\">";
@@ -121,9 +121,6 @@
                 $posicion_player = $_POST["posicion"];
                 $tesoro = $posiciones[0];
 
-                if ($posicion_player == $tesoro) {
-                    echo "<h2>¡Encontraste el tesoro!</h2>";
-                }
             }
 
         ?>
