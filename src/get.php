@@ -10,8 +10,8 @@
 
         #echo "<pre>" . print_r($_GET, true) . "</pre>";
         if (!empty($_GET)):
-            echo "Hola, $_GET["nombre"]<br/>";
-            echo "Edad: $_GET["edad"]<br/>";
+            echo "Hola, " . $_GET["nombre"] . "<br/>";
+            echo "Edad:" . $_GET["edad"] . "<br/>";
         endif;
         
 
