@@ -1,22 +1,20 @@
 <?php
-    # ---------- 1. Recuperamos el estado o empezamos partida ----------
-    if (isset($_POST["pos"])) {
-        $posiciones     = $_POST["pos"];
-        $llave_recogida = $_POST["llave_recogida"];
-        $cofre_abierto  = $_POST["cofre_abierto"];
-        $inventario     = $_POST["inventario"];
-        $estado         = $_POST["estado"];
+    # ---------- 1. Recuperamos el estado (cookies) o empezamos partida ----------
+    if (isset($_COOKIE["pos"]) && !isset($_GET["nueva"])) {
+        $posiciones     = $_COOKIE["pos"];
+        $llave_recogida = $_COOKIE["llave_recogida"];
+        $cofre_abierto  = $_COOKIE["cofre_abierto"];
+        $inventario     = $_COOKIE["inventario"];
+        $estado         = $_COOKIE["estado"];
     } else {
-        # posiciones de los elementos
+        # posiciones de los elementos (0 = tesoro, 1 = trampa, 2 = cofre, 3 = llave)
         $posiciones = [];
 
-        # colocamos los elementos (0 = tesoro, 1 = trampa, 2 = cofre, 3 = llave)
         for ($i = 1; $i <= 4; $i++):
             do {
                 $valor = rand(1, 100);
             } while (in_array($valor, $posiciones));
 
-            # guardamos el valor en el array
             $posiciones[] = $valor;
         endfor;
 
@@ -55,6 +53,15 @@
             $mensaje = "No has encontrado nada.";
         }
     }
+
+    # ---------- 3. Guardamos el estado en cookies ----------
+    foreach ($posiciones as $indice => $valor) {
+        setcookie("pos[$indice]", $valor);
+    }
+    setcookie("llave_recogida", $llave_recogida);
+    setcookie("cofre_abierto", $cofre_abierto);
+    setcookie("inventario", $inventario);
+    setcookie("estado", $estado);
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -150,15 +157,6 @@
         # el formulario solo se muestra mientras se juega
         if ($estado == "jugando") {
             echo "<form action=\"tesorob.php\" method=\"post\">";
-
-            foreach ($posiciones as $valor) {
-                echo "<input type=\"hidden\" name=\"pos[]\" value=\"$valor\">";
-            }
-            echo "<input type=\"hidden\" name=\"llave_recogida\" value=\"$llave_recogida\">";
-            echo "<input type=\"hidden\" name=\"cofre_abierto\" value=\"$cofre_abierto\">";
-            echo "<input type=\"hidden\" name=\"inventario\" value=\"$inventario\">";
-            echo "<input type=\"hidden\" name=\"estado\" value=\"$estado\">";
-
             echo "<label for=\"numero\">Posición</label>";
             echo "<input id=\"numero\" type=\"number\" name=\"posicion\" min=\"1\" max=\"100\" autofocus required>";
             echo "<button>Enviar</button>";
@@ -166,7 +164,7 @@
         }
         ?>
 
-        <a href="tesorob.php" class="btn btn-secondary mt-2">Nueva partida</a>
+        <a href="tesorob.php?nueva=1" class="btn btn-secondary mt-2">Nueva partida</a>
     </div>
 </body>
 
