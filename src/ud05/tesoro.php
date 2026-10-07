@@ -1,11 +1,21 @@
 <?php
-    if (isset($_COOKIE["pos"]) && !isset($_GET["nueva"])) {
-        $posiciones     = $_COOKIE["pos"];
-        $llave_recogida = $_COOKIE["llave_recogida"];
-        $cofre_abierto  = $_COOKIE["cofre_abierto"];
-        $inventario     = $_COOKIE["inventario"];
-        $estado         = $_COOKIE["estado"];
+    # session_start() siempre antes de cualquier HTML
+    session_start();
+
+    # ---------- 1. Recuperamos el estado (sesión) o empezamos partida ----------
+    # comprobamos que existan TODAS las claves; si falta alguna, partida nueva
+    if (
+        isset($_SESSION["pos"], $_SESSION["llave_recogida"], $_SESSION["cofre_abierto"],
+              $_SESSION["inventario"], $_SESSION["estado"])
+        && !isset($_GET["nueva"])
+    ) {
+        $posiciones     = $_SESSION["pos"];
+        $llave_recogida = $_SESSION["llave_recogida"];
+        $cofre_abierto  = $_SESSION["cofre_abierto"];
+        $inventario     = $_SESSION["inventario"];
+        $estado         = $_SESSION["estado"];
     } else {
+        # posiciones de los elementos (0 = tesoro, 1 = trampa, 2 = cofre, 3 = llave)
         $posiciones = [];
 
         for ($i = 1; $i <= 4; $i++):
@@ -22,6 +32,7 @@
         $estado         = "jugando";
     }
 
+    # ---------- 2. Procesamos la casilla elegida ----------
     $mensaje = "";
 
     if (isset($_POST["posicion"]) && $estado == "jugando") {
@@ -45,19 +56,18 @@
                 $mensaje = "🎁 Has abierto el cofre con la llave. ¡Premio obtenido!";
             } else {
                 $mensaje = "🔒 El cofre está cerrado. Necesitas la llave.";
-            } 
+            }
         } else {
             $mensaje = "No has encontrado nada.";
         }
     }
 
-    foreach ($posiciones as $indice => $valor) {
-        setcookie("pos[$indice]", $valor);
-    }
-    setcookie("llave_recogida", $llave_recogida);
-    setcookie("cofre_abierto", $cofre_abierto);
-    setcookie("inventario", $inventario);
-    setcookie("estado", $estado);
+    # ---------- 3. Guardamos el estado en la sesión ----------
+    $_SESSION["pos"]            = $posiciones;
+    $_SESSION["llave_recogida"] = $llave_recogida;
+    $_SESSION["cofre_abierto"]  = $cofre_abierto;
+    $_SESSION["inventario"]     = $inventario;
+    $_SESSION["estado"]         = $estado;
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -152,7 +162,7 @@
 
         # el formulario solo se muestra mientras se juega
         if ($estado == "jugando") {
-            echo "<form action=\"tesorob.php\" method=\"post\">";
+            echo "<form action=\"tesoro.php\" method=\"post\">";
             echo "<label for=\"numero\">Posición</label>";
             echo "<input id=\"numero\" type=\"number\" name=\"posicion\" min=\"1\" max=\"100\" autofocus required>";
             echo "<button>Enviar</button>";
@@ -160,7 +170,7 @@
         }
         ?>
 
-        <a href="tesorob.php?nueva=1" class="btn btn-secondary mt-2">Nueva partida</a>
+        <a href="tesoro.php?nueva=1" class="btn btn-secondary mt-2">Nueva partida</a>
     </div>
 </body>
 
