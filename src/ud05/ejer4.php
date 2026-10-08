@@ -19,7 +19,6 @@
 </head>
 
 <body>
-    <h1>Última visita</h1>
 
     <?php if ($anterior == ""): ?>
         <p>Esta es tu primera visita.</p>
