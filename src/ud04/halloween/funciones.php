@@ -23,4 +23,15 @@
             echo "</tr>";
         }
     }
+
+    function habitacionOcupada(array $habitaciones, array $reservas): array {
+        foreach ($habitaciones as $i => $habitacion) {
+            foreach ($reservas as $reserva) {
+                if ($reserva["numero"] === $habitacion["Numero"] && $reserva["estado"] === "Activa") {
+                    $habitaciones[$i]["Disponibilidad"] = "Ocupada";
+                }
+            }
+        }
+        return $habitaciones;
+    }
 ?>
