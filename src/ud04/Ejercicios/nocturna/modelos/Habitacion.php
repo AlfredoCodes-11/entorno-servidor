@@ -7,8 +7,8 @@
          * 
          */
         public function __construct(public readonly int $numero,
-                                public private(set) string $nombre,
-                                public private(set) int $capacidad {
+                                    public private(set) string $nombre,
+                                    public private(set) int $capacidad {
                                     set {
                                         if ($value <= 0){
                                             throw new InvalidArgumentException(
@@ -62,6 +62,21 @@
             }
     
             return $this->precio * $noches;
+        }
+
+
+        public function obtenerHtml(): string
+        {
+            $estado = $this->disponible ? 'Disponible' : 'Ocupada';
+
+            $html  = '<div>';
+            $html .= '<h2>Habitación ' . $this->numero . ' — ' . ($this->nombre) . '</h2>';
+            $html .= '<p>Precio por noche: ' . $this->precio . ' €</p>';
+            $html .= '<p>Capacidad: ' . $this->capacidad . ' huéspedes</p>';
+            $html .= '<p>Estado: ' . $estado . '</p>';
+            $html .= '</div>';
+
+            return $html;
         }
 
 
