@@ -10,7 +10,7 @@
                                     public private(set) string $nombre,
                                     public private(set) int $capacidad {
                                     set {
-                                        if ($value <= 0){
+                                        if ($value < 1){
                                             throw new InvalidArgumentException(
                                                 "La capacidad máxima debe ser como mínimo de una persona."
                                             );

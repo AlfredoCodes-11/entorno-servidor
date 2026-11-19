@@ -1,0 +1,10 @@
+{
+    "autoload": {
+        "psr-4": { 
+            "Nocturna\\": "./" 
+        }
+    },
+    "require": {
+        "twig/twig": "^3.0"
+    }
+}

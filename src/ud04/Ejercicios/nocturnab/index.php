@@ -1,9 +1,9 @@
 <?php
 
-require_once 'EstadoHabitacion.php';
-require_once 'Habitacion.php';
-require_once 'Huesped.php';
-require_once 'Reserva.php';
+require_once 'modelos/EstadoHabitacion.php';
+require_once 'modelos/Habitacion.php';
+require_once 'modelos/Huesped.php';
+require_once 'modelos/Reserva.php';
 
 session_start();
 
@@ -105,7 +105,7 @@ foreach ($habitaciones as $habitacion) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Hotel Nocturna</title>
-    <link rel="stylesheet" href="estilos.css">
+    <link rel="stylesheet" href="styles/estilos.css">
 </head>
 <body>
     <header>

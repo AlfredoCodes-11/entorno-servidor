@@ -1,0 +1,23 @@
+services:
+  web:
+    build: .
+    container_name: nocturna-web
+    ports:
+      - "80:80"
+    volumes:
+      - ./src:/var/www/html
+    depends_on:
+      - db
+  
+  db:
+    image: mysql:lts
+    container_name: nocturna-bd
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: nocturna
+      MYSQL_USER: user
+      MYSQL_PASSWORD: password
+    ports:
+      - "3306:3306"
+    #volumes:
+    #  - db_data:/var/lib/mysql

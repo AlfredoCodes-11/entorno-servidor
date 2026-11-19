@@ -1,0 +1,53 @@
+/**
+ * Estilos del panel del hotel Nocturna.
+ * @author Antonio José Sánchez Bujaldón
+ */
+
+:root {
+    --bg-nocturna: #0d0b12;
+    --surface-nocturna: #171321;
+    --border-nocturna: #2d243f;
+    --accent-crimson: #9e1b32;
+    --accent-purple: #6f42c1;
+}
+
+body {
+    background-color: var(--bg-nocturna);
+    color: #e4e0ec;
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+}
+
+.navbar-nocturna {
+    background-color: var(--surface-nocturna);
+    border-bottom: 1px solid var(--border-nocturna);
+}
+
+.navbar-brand {
+    letter-spacing: 2px;
+    font-weight: 700;
+    color: #f8f5ff !important;
+}
+
+.card-nocturna {
+    background-color: var(--surface-nocturna);
+    border: 1px solid var(--border-nocturna);
+    border-radius: 0.75rem;
+}
+
+.table-nocturna {
+    --bs-table-bg: transparent;
+    --bs-table-hover-bg: rgba(111, 66, 193, 0.12);
+    --bs-table-border-color: var(--border-nocturna);
+}
+
+.btn-reservar {
+    background-color: var(--accent-purple);
+    border-color: var(--accent-purple);
+    color: #fff;
+}
+
+.btn-reservar:hover:not(:disabled) {
+    background-color: #59339d;
+    border-color: #59339d;
+    color: #fff;
+}
