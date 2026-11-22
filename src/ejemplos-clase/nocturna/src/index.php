@@ -10,4 +10,12 @@
     use Nocturna\Controladores\HabitacionController ;
 
     $controlador = new HabitacionController ;
-    $controlador->indice() ;
+
+    # La acción llega por la URL (index.php?accion=...). Si no hay, mostramos el panel.
+    $accion = $_GET["accion"] ?? "indice" ;
+
+    match ($accion) {
+        "nueva"   => $controlador->nueva(),      // muestra el formulario de alta
+        "guardar" => $controlador->guardar(),    // recibe el formulario y guarda la habitación
+        default   => $controlador->indice(),     // panel de habitaciones
+    } ;

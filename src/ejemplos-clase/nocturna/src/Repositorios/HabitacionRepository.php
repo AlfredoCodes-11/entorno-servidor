@@ -34,6 +34,28 @@
             return $resultado->fetchAll(\PDO::FETCH_CLASS, Habitacion::class) ;
         }
 
+        /**
+         * Inserta una nueva habitación en la base de datos.
+         * @param Habitacion $habitacion Habitación a guardar
+         * @return bool true si se ha guardado
+         */
+        public function save(Habitacion $habitacion): bool
+        {
+            # Usamos una sentencia preparada: los datos nunca se pegan directamente en el SQL
+            $resultado = $this->pdo->prepare(
+                "INSERT INTO habitacion (numero, nombre, capacidad, precio, estado) " .
+                "VALUES (:numero, :nombre, :capacidad, :precio, :estado)"
+            ) ;
+
+            return $resultado->execute([
+                ":numero" => $habitacion->numero,
+                ":nombre" => $habitacion->nombre,
+                ":capacidad" => $habitacion->capacidad,
+                ":precio" => $habitacion->precio,
+                ":estado" => $habitacion->estado->value,
+            ]) ;
+        }
+
 
 
     }
