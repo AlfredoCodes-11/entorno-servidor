@@ -1,0 +1,43 @@
+body {
+    background-color: #f3f5f2;
+}
+
+.navbar-senderismo {
+    background-color: #2f5d3a;
+}
+
+.navbar-brand {
+    font-weight: 700;
+    letter-spacing: 2px;
+}
+
+.btn-senderismo {
+    background-color: #2f5d3a;
+    border-color: #2f5d3a;
+    color: #fff;
+}
+
+.btn-senderismo:hover {
+    background-color: #234a2d;
+    border-color: #234a2d;
+    color: #fff;
+}
+
+.dato {
+    background-color: #f3f5f2;
+    border-radius: 8px;
+    padding: 1rem;
+    text-align: center;
+}
+
+.dato-etiqueta {
+    display: block;
+    font-size: 0.85rem;
+    color: #6c757d;
+}
+
+.dato-valor {
+    display: block;
+    font-size: 1.5rem;
+    font-weight: 600;
+}
