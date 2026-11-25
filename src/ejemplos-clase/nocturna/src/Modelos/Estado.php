@@ -11,3 +11,5 @@
         case OCUPADA     = 0 ;
         case DISPONIBLE  = 1 ;        
     }
+
+   
